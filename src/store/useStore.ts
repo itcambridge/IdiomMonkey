@@ -45,7 +45,7 @@ const useStore = create<FeatureState>()(
               name,
               purpose,
               description: purpose,
-              created_at: new Date().toISOString()
+              createdAt: new Date().toISOString()
             }
             return {
               projects: { ...state.projects, [id]: newProject }

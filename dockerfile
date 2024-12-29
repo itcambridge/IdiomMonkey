@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm install web-vitals --save
+RUN npm install web-vitals @types/web-vitals --save
 RUN npm run build
 
 FROM nginx:alpine

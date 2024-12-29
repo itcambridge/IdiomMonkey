@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactFlow, {
   Node,
   Edge,
@@ -46,7 +46,6 @@ export const DependencyGraph = ({ features, dependencies, searchTerm }: Dependen
     return counts
   }
 
-  const dependencyCounts = getDependencyCounts()
 
   const createNodes = () => features.map((feature) => ({
     id: feature.id,
@@ -170,8 +169,8 @@ export const DependencyGraph = ({ features, dependencies, searchTerm }: Dependen
             connectOnClick={true}
             minZoom={0.5}
             maxZoom={1.5}
-            defaultZoom={1}
-            edgeClass="connector-line"
+            
+            
             aria-label="Feature dependency graph"
           >
             <Background color="#e2e8f0" gap={16} className="grid-background" />

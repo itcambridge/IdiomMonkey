@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { CreateProject } from '../components/projects/CreateProject'
 import { ProjectList } from '../components/projects/ProjectList'

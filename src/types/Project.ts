@@ -14,8 +14,9 @@ export interface Project {
   id: string;
   name: string;
   purpose: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  description?: string;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export interface Feature {

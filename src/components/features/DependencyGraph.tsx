@@ -8,7 +8,8 @@ import ReactFlow, {
   useEdgesState,
   Connection,
   ReactFlowProvider,
-  Panel
+  Panel,
+  MarkerType
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import { Feature, Dependency, FeatureCategory } from '../../types/Project'
@@ -100,10 +101,8 @@ export const DependencyGraph = ({ features, dependencies, searchTerm }: Dependen
         opacity: 0.8
       },
       markerEnd: {
-        type: 'arrowclosed',
-        color: '#94a3b8',
-        width: 20,
-        height: 20
+        type: MarkerType.ArrowClosed,
+        color: '#94a3b8'
       }
     }))
 
@@ -135,10 +134,8 @@ export const DependencyGraph = ({ features, dependencies, searchTerm }: Dependen
           opacity: 0.8
         },
         markerEnd: {
-          type: 'arrowclosed',
-          color: '#94a3b8',
-          width: 20,
-          height: 20
+          type: MarkerType.ArrowClosed,
+          color: '#94a3b8'
         }
       }
       setEdges(eds => [...eds, newEdge])

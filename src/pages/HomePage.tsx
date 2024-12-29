@@ -18,7 +18,7 @@ export const HomePage = () => {
       id: crypto.randomUUID(),
       name: name.trim(),
       purpose: purpose.trim(),
-      created_at: new Date().toISOString()
+      createdAt: new Date().toISOString()
     }
 
     addProject(project)

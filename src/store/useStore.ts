@@ -1,6 +1,7 @@
 import { create } from 'zustand'
-import { persist, devtools } from 'zustand/middleware'
+import { persist, devtools, PersistStorage, StorageValue } from 'zustand/middleware'
 import { Feature, Project, Dependency, FeatureCategory } from '../types/Project'
+import { v4 as uuidv4 } from 'uuid'
 
 interface FeatureState {
   // Projects
@@ -31,6 +32,34 @@ interface FeatureState {
   updateNodePosition: (nodeId: string, position: { x: number; y: number }) => void
 }
 
+const storage: PersistStorage<FeatureState> = {
+  getItem: (name: string) => {
+    try {
+      const str = localStorage.getItem(name)
+      console.log('Loading from storage:', name, str)
+      return str ? JSON.parse(str) : null
+    } catch (error) {
+      console.error('Error loading from storage:', error)
+      return null
+    }
+  },
+  setItem: (name: string, value: StorageValue<FeatureState>) => {
+    try {
+      console.log('Saving to storage:', name, value)
+      localStorage.setItem(name, JSON.stringify(value))
+    } catch (error) {
+      console.error('Error saving to storage:', error)
+    }
+  },
+  removeItem: (name: string) => {
+    try {
+      localStorage.removeItem(name)
+    } catch (error) {
+      console.error('Error removing from storage:', error)
+    }
+  }
+}
+
 const useStore = create<FeatureState>()(
   devtools(
     persist(
@@ -39,7 +68,7 @@ const useStore = create<FeatureState>()(
         projects: {},
         createProject: (name: string, purpose: string) =>
           set((state) => {
-            const id = crypto.randomUUID()
+            const id = uuidv4()
             const newProject: Project = {
               id,
               name,
@@ -47,9 +76,12 @@ const useStore = create<FeatureState>()(
               description: purpose,
               createdAt: new Date().toISOString()
             }
-            return {
+            console.log('Creating project:', newProject)
+            const newState = {
               projects: { ...state.projects, [id]: newProject }
             }
+            console.log('New state:', newState)
+            return newState
           }),
         addProject: (project) =>
           set((state) => ({
@@ -198,6 +230,11 @@ const useStore = create<FeatureState>()(
       }),
       {
         name: 'feature-store',
+        storage,
+        version: 1, // Add version for migrations if needed
+        onRehydrateStorage: () => (state) => {
+          console.log('Storage rehydrated:', state)
+        }
       }
     )
   )

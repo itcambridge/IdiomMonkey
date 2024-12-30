@@ -5,14 +5,32 @@ import { motion } from 'framer-motion'
 export const CreateProject = () => {
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
+  const [debugMessage, setDebugMessage] = useState('')
   const createProject = useStore(state => state.createProject)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim() || !purpose.trim()) return
-    createProject(name, purpose)
-    setName('')
-    setPurpose('')
+
+    try {
+      // Add visible debug message
+      setDebugMessage('Creating project...')
+      
+      createProject(name, purpose)
+      
+      // Check if project was added
+      const projects = useStore.getState().projects
+      const projectCount = Object.keys(projects).length
+      
+      setDebugMessage(`Project created. Total projects: ${projectCount}`)
+      
+      setName('')
+      setPurpose('')
+    } catch (error: unknown) {
+      // Type-safe error handling
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+      setDebugMessage(`Error: ${errorMessage}`)
+    }
   }
 
   return (
@@ -69,6 +87,13 @@ export const CreateProject = () => {
           Create Project
         </motion.button>
       </div>
+      
+      {/* Add debug message display */}
+      {debugMessage && (
+        <div className="mt-4 p-2 bg-blue-50 text-blue-700 rounded">
+          {debugMessage}
+        </div>
+      )}
     </form>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import useStore from '../../store/useStore'
-import { FeatureCategory, FeaturePriority } from '../../types/Project'
+import { FeatureCategory, FeaturePriority, Feature } from '../../types/Project'
 
 interface CreateFeatureModalProps {
   projectId: string
@@ -28,13 +28,17 @@ export const CreateFeatureModal = ({ projectId, isOpen, onClose }: CreateFeature
     
     console.log('Form submitted with data:', formData)
     
-    const newFeature = {
+    const newFeature: Feature = {
       id: uuidv4(),
       project_id: projectId,
-      ...formData,
+      name: formData.name,
+      description: formData.description,
+      category: formData.category,
       priority,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      notes: formData.notes,
+      history: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }
 
     console.log('Attempting to create feature:', newFeature)

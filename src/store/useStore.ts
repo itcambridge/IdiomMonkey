@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist, devtools, PersistStorage, StorageValue } from 'zustand/middleware'
-import { Feature, Project, Dependency, FeatureCategory } from '../types/Project'
+import { Feature, Project, Dependency, FeatureCategory, FeatureHistory } from '../types/Project'
 import { v4 as uuidv4 } from 'uuid'
 
 interface FeatureState {
@@ -143,9 +143,37 @@ const useStore = create<FeatureState>()(
             features: { ...state.features, [feature.id]: feature }
           })),
         updateFeature: (feature) =>
-          set((state) => ({
-            features: { ...state.features, [feature.id]: feature }
-          })),
+          set((state) => {
+            const existingFeature = state.features[feature.id]
+            if (!existingFeature) return state
+
+            // Create history entry
+            const historyEntry: FeatureHistory = {
+              id: uuidv4(),
+              timestamp: new Date().toISOString(),
+              previousValues: {
+                name: existingFeature.name,
+                description: existingFeature.description,
+                category: existingFeature.category,
+                priority: existingFeature.priority,
+                notes: existingFeature.notes
+              }
+            }
+
+            // Update feature with history
+            const updatedFeature = {
+              ...feature,
+              history: [...(existingFeature.history || []), historyEntry],
+              updatedAt: new Date().toISOString()
+            }
+
+            return {
+              features: {
+                ...state.features,
+                [feature.id]: updatedFeature
+              }
+            }
+          }),
         deleteFeature: (id) =>
           set((state) => {
             const { [id]: removed, ...remaining } = state.features

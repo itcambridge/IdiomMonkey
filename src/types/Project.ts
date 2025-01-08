@@ -10,6 +10,18 @@ export enum FeaturePriority {
   Low = 'low'
 }
 
+export interface FeatureHistory {
+  id: string;
+  timestamp: string;
+  previousValues: {
+    name: string;
+    description: string;
+    category: FeatureCategory;
+    priority?: FeaturePriority;
+    notes?: string;
+  }
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -27,8 +39,9 @@ export interface Feature {
   category: FeatureCategory;
   priority: FeaturePriority;
   notes: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  history: FeatureHistory[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Dependency {

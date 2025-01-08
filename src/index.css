@@ -3,199 +3,62 @@
 @tailwind utilities;
 
 :root {
-  /* Color Palette */
-  --primary-blue: #4A90E2;
-  --secondary-blue: #87CEEB;
-  --primary-green: #A3D9A5;
-  --secondary-green: #81C784;
-  --primary-purple: #C5B3E6;
-  --secondary-purple: #B39DDB;
-  --background: #f5f7fa;
-  --text-dark: #2d2d2d;
-  --connector-line: #B0BEC5;
-  --node-border: #B0BEC5;
-  --node-blue: #E3F2FD;
-  --node-green: #DFF6DD;
-  --node-purple: #F0E4FF;
+  --color-bg-primary: rgba(15, 7, 40, 0.85);
+  --color-bg-secondary: rgba(26, 15, 46, 0.85);
+  --color-accent: #ff00ff;
+  --color-accent-hover: #ff40ff;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b4a5d0;
 }
 
 body {
-  background: linear-gradient(to bottom, #f7f8fc, #ffffff);
+  background-image: 
+    linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%),
+    url('./assets/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--color-text-primary);
   min-height: 100vh;
-  color: #333;
-}
-
-/* Custom button styles */
-.btn {
-  @apply px-4 py-2 rounded-md transition-all duration-200;
-}
-
-.btn-primary {
-  background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
-  @apply text-white border-none;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(90deg, #6AB8D6, #357ABD);
-  @apply shadow-md;
-}
-
-.btn-secondary {
-  background-color: var(--secondary-purple);
-  @apply hover:opacity-90;
-}
-
-/* Card styles */
-.card {
-  @apply bg-white rounded-lg shadow-sm p-4;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Feature node styles */
-.feature-node {
-  background-color: var(--background);
-  @apply rounded-lg p-4 transition-shadow duration-200;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.feature-node:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Landing Page Styles */
-.create-project-form {
-  @apply p-6 bg-white rounded-lg;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.project-card {
-  @apply transition-all duration-300 bg-white rounded-lg p-4;
-  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
-}
-
-.project-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .landing-header {
-  @apply text-3xl font-bold mb-6;
-  color: var(--text-dark);
-  position: relative;
+  @apply text-4xl font-bold mb-2;
+  background: linear-gradient(to right, #ff00ff, #ff69b4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
 }
 
-.landing-header::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, var(--primary-blue), transparent);
+.project-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
-/* Feature Categorization Page Styles */
-.category-header {
-  @apply text-xl font-bold mb-6 text-gray-900 flex items-center gap-2 pb-2;
-  border-bottom: 2px solid #E0E0E0;
-  position: relative;
+.project-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
 }
 
-.category-header::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(to right, currentColor, transparent);
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.feature-card {
-  @apply mb-4 p-4 bg-white rounded-lg transition-all duration-200;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
 }
 
-.feature-card:hover {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
 }
 
-.category-container {
-  @apply bg-white p-6 rounded-xl;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Export Button Styles */
-.btn-export {
-  @apply px-4 py-2 rounded-md transition-all duration-200 text-white;
-  background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
-}
-
-.btn-export:hover {
-  background: linear-gradient(90deg, #B39DDB, #9575CD);
-  @apply shadow-md;
-}
-
-/* Dependency Visualization Styles */
-.dependency-graph {
-  @apply bg-gradient-to-br from-gray-100 via-gray-50 to-white p-6 rounded-xl;
-}
-
-.node {
-  @apply rounded-xl transition-all duration-200;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--node-border);
-}
-
-.node-essential {
-  background: var(--node-blue);
-}
-
-.node-nice-to-have {
-  background: var(--node-purple);
-}
-
-.node-future {
-  background: var(--node-green);
-}
-
-.node:hover {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-.connector-line {
-  stroke: var(--connector-line);
-  stroke-dasharray: 5, 5;
-  transition: stroke 0.2s ease;
-}
-
-.connector-line:hover {
-  stroke: var(--primary-blue);
-}
-
-.grid-background {
-  @apply bg-gray-100 opacity-50;
-}
-
-.zoom-control {
-  @apply bg-white rounded-full shadow-sm transition-all duration-200;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.zoom-control:hover {
-  @apply bg-blue-50;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.dependency-panel {
-  @apply bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-gray-200;
-}
-
-.search-input {
-  @apply w-64 px-4 py-2 pl-10 border border-gray-200 rounded-lg shadow-sm;
-  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
-  background: rgba(255, 255, 255, 0.9);
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
 }

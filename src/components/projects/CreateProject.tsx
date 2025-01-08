@@ -13,12 +13,10 @@ export const CreateProject = () => {
     if (!name.trim() || !purpose.trim()) return
 
     try {
-      // Add visible debug message
       setDebugMessage('Creating project...')
       
       createProject(name, purpose)
       
-      // Check if project was added
       const projects = useStore.getState().projects
       const projectCount = Object.keys(projects).length
       
@@ -27,70 +25,62 @@ export const CreateProject = () => {
       setName('')
       setPurpose('')
     } catch (error: unknown) {
-      // Type-safe error handling
       const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
       setDebugMessage(`Error: ${errorMessage}`)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative bg-white rounded-xl p-8 sm:p-10 border border-gray-100 shadow-sm">
-      <div className="space-y-6">
-        <div>
-          <label htmlFor="projectName" className="block text-sm font-medium text-gray-900 mb-2">
-            Project Name
-          </label>
+    <form onSubmit={handleSubmit} className="relative bg-opacity-5 bg-white backdrop-blur-md rounded-xl p-6 border border-[rgba(255,0,255,0.2)] shadow-lg">
+      <div className="flex items-end gap-4">
+        <div className="flex-1">
           <input
             id="projectName"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name your project"
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white
-              placeholder:text-gray-400 text-gray-900
+            className="w-full px-4 py-3 rounded-lg border border-[rgba(255,0,255,0.2)] bg-[rgba(255,255,255,0.03)]
+              placeholder:text-[#b4a5d0] text-white
               transition-all duration-200
-              focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20
-              hover:border-gray-300"
+              focus:outline-none focus:border-[#ff00ff] focus:ring-2 focus:ring-[rgba(255,0,255,0.2)]
+              hover:border-[rgba(255,0,255,0.4)]"
           />
         </div>
-        <div>
-          <label htmlFor="projectPurpose" className="block text-sm font-medium text-gray-900 mb-2">
-            Project Purpose
-          </label>
-          <textarea
+        <div className="flex-[2]">
+          <input
             id="projectPurpose"
+            type="text"
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
-            placeholder="Describe what this project aims to achieve and its main objectives"
-            rows={4}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white
-              placeholder:text-gray-400 text-gray-900 resize-none
+            placeholder="Describe what this project aims to achieve"
+            className="w-full px-4 py-3 rounded-lg border border-[rgba(255,0,255,0.2)] bg-[rgba(255,255,255,0.03)]
+              placeholder:text-[#b4a5d0] text-white
               transition-all duration-200
-              focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20
-              hover:border-gray-300"
+              focus:outline-none focus:border-[#ff00ff] focus:ring-2 focus:ring-[rgba(255,0,255,0.2)]
+              hover:border-[rgba(255,0,255,0.4)]"
           />
         </div>
         <motion.button
           type="submit"
           disabled={!name.trim() || !purpose.trim()}
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(255,0,255,0.5)' }}
           whileTap={{ scale: 0.98 }}
-          className="w-full px-6 py-3 rounded-lg font-medium text-white
-            bg-gradient-to-r from-indigo-600 to-purple-600
+          className="px-6 py-3 rounded-lg font-medium text-white whitespace-nowrap
+            bg-gradient-to-r from-[#ff00ff] to-[#ff69b4]
             transition-all duration-200
-            hover:from-indigo-700 hover:to-purple-700
-            focus:outline-none focus:ring-2 focus:ring-indigo-500/50
+            hover:from-[#ff40ff] hover:to-[#ff8dc7]
+            focus:outline-none focus:ring-2 focus:ring-[rgba(255,0,255,0.5)]
             disabled:opacity-50 disabled:cursor-not-allowed
-            disabled:hover:from-indigo-600 disabled:hover:to-purple-600
-            shadow-sm hover:shadow-md"
+            disabled:hover:from-[#ff00ff] disabled:hover:to-[#ff69b4]
+            shadow-[0_0_10px_rgba(255,0,255,0.3)]"
         >
           Create Project
         </motion.button>
       </div>
       
-      {/* Add debug message display */}
       {debugMessage && (
-        <div className="mt-4 p-2 bg-blue-50 text-blue-700 rounded">
+        <div className="mt-4 p-2 bg-[rgba(255,0,255,0.1)] text-[#ff69b4] rounded border border-[rgba(255,0,255,0.2)]">
           {debugMessage}
         </div>
       )}

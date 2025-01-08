@@ -13,14 +13,14 @@ const fadeIn = {
 export const LandingPage = () => {
   return (
     <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="landing-header">
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="landing-header text-2xl sm:text-3xl md:text-4xl">
             Feature Brainstorming Tool
           </h1>
         </div>
         
-        <div className="max-w-6xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12">
           <motion.div 
             variants={fadeIn}
             initial="initial"

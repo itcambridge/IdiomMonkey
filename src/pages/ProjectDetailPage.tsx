@@ -16,7 +16,7 @@ const Legend = () => (
     </div>
     <div className="flex items-center gap-2">
       <div className="w-4 h-4 rounded-full bg-[#ff69b4]" />
-      <span className="text-[#b4a5d0]">Nice-to-Have</span>
+      <span className="text-[#b4a5d0]">Nice</span>
     </div>
     <div className="flex items-center gap-2">
       <div className="w-4 h-4 rounded-full bg-[#ff00ff]" />
@@ -108,12 +108,6 @@ export const ProjectDetailPage = () => {
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <Link to="/" className="text-[#b4a5d0] hover:text-[#ff00ff] text-sm flex items-center gap-1 mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Back to Projects
-          </Link>
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2">{project.name}</h1>
@@ -143,6 +137,15 @@ export const ProjectDetailPage = () => {
                   </svg>
                 </div>
               )}
+              <Link
+                to="/"
+                className="p-3 rounded-lg bg-[rgba(255,255,255,0.03)] border border-[rgba(255,0,255,0.2)] text-[#b4a5d0] hover:text-[#ff00ff] hover:border-[#ff00ff] shadow-lg transition-all"
+                title="Home"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+              </Link>
               <motion.button
                 onClick={() => setIsModalOpen(true)}
                 whileHover={{ scale: 1.05 }}

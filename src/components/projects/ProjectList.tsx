@@ -17,19 +17,19 @@ export const ProjectList = () => {
 
   if (Object.keys(projects).length === 0) {
     return (
-      <div className="text-center p-8 bg-[rgba(255,255,255,0.03)] backdrop-blur-md rounded-xl border border-[rgba(255,0,255,0.2)] shadow-lg max-w-[200px] mx-auto">
+      <div className="text-center p-6 sm:p-8 bg-[rgba(255,255,255,0.03)] backdrop-blur-md rounded-xl border border-[rgba(255,0,255,0.2)] shadow-lg max-w-[200px] mx-auto">
         <h3 className="text-lg font-medium text-white mb-2">No projects yet</h3>
-        <p className="text-[#b4a5d0]">Create your first project to get started!</p>
+        <p className="text-[#b4a5d0] text-sm">Create your first project to get started!</p>
       </div>
     )
   }
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold bg-gradient-to-r from-[#ff00ff] to-[#ff69b4] text-transparent bg-clip-text mb-6 text-center">
+      <h2 className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-[#ff00ff] to-[#ff69b4] text-transparent bg-clip-text mb-4 sm:mb-6 text-center">
         Your Projects
       </h2>
-      <div className="flex flex-wrap gap-8">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
         {Object.values(projects).map(project => (
           <motion.div
             key={project.id}
@@ -37,15 +37,15 @@ export const ProjectList = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="project-card group relative aspect-square bg-[rgba(255,255,255,0.03)] backdrop-blur-md rounded-xl border border-[rgba(255,0,255,0.2)] shadow-lg p-3 flex flex-col w-[200px]
+            className="project-card group relative aspect-square bg-[rgba(255,255,255,0.03)] backdrop-blur-md rounded-xl border border-[rgba(255,0,255,0.2)] shadow-lg p-3 flex flex-col
               hover:border-[#ff00ff] hover:shadow-[0_0_15px_rgba(255,0,255,0.3)] transition-all duration-300"
           >
             <Link to={`/project/${project.id}`} className="flex flex-col flex-1">
               <div className="flex-1">
-                <h3 className="text-base font-semibold text-white mb-1.5">
+                <h3 className="text-base font-semibold text-white mb-1.5 line-clamp-2">
                   {project.name}
                 </h3>
-                <p className="text-[#b4a5d0] text-xs">
+                <p className="text-[#b4a5d0] text-xs line-clamp-3">
                   {project.description || project.purpose}
                 </p>
               </div>
@@ -62,7 +62,7 @@ export const ProjectList = () => {
                 e.preventDefault()
                 handleDeleteProject(project.id, project.name)
               }}
-              className="absolute top-2 right-2 p-1.5 text-[#b4a5d0] hover:text-[#ff00ff] opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute top-2 right-2 p-1.5 text-[#b4a5d0] hover:text-[#ff00ff] opacity-0 group-hover:opacity-100 transition-opacity sm:opacity-100"
               aria-label={`Delete project: ${project.name}`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">

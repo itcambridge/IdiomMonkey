@@ -31,9 +31,9 @@ export const CreateProject = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative bg-opacity-5 bg-white backdrop-blur-md rounded-xl p-6 border border-[rgba(255,0,255,0.2)] shadow-lg">
-      <div className="flex items-end gap-4">
-        <div className="flex-1">
+    <form onSubmit={handleSubmit} className="relative bg-opacity-5 bg-white backdrop-blur-md rounded-xl p-4 sm:p-6 border border-[rgba(255,0,255,0.2)] shadow-lg">
+      <div className="flex flex-col sm:flex-row gap-4 sm:items-end">
+        <div className="w-full sm:flex-1">
           <input
             id="projectName"
             type="text"
@@ -47,7 +47,7 @@ export const CreateProject = () => {
               hover:border-[rgba(255,0,255,0.4)]"
           />
         </div>
-        <div className="flex-[2]">
+        <div className="w-full sm:flex-[2]">
           <input
             id="projectPurpose"
             type="text"
@@ -66,7 +66,7 @@ export const CreateProject = () => {
           disabled={!name.trim() || !purpose.trim()}
           whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(255,0,255,0.5)' }}
           whileTap={{ scale: 0.98 }}
-          className="px-6 py-3 rounded-lg font-medium text-white whitespace-nowrap
+          className="w-full sm:w-auto px-6 py-3 rounded-lg font-medium text-white whitespace-nowrap
             bg-gradient-to-r from-[#ff00ff] to-[#ff69b4]
             transition-all duration-200
             hover:from-[#ff40ff] hover:to-[#ff8dc7]
